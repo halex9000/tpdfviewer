@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 223
+  Left = 244
   Height = 634
-  Top = 198
+  Top = 166
   Width = 1630
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Explorer'
@@ -178,35 +178,71 @@ object frmMain: TfrmMain
     TabOrder = 6
     object tTotPag: TEdit
       Left = 63
-      Height = 25
-      Top = 13
-      Width = 43
+      Height = 26
+      Top = 10
+      Width = 73
+      Alignment = taCenter
       Enabled = False
       Font.CharSet = ANSI_CHARSET
-      Font.Height = -13
+      Font.Height = -15
+      Font.Name = 'Verdana'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
-      Font.Style = [fsBold]
+      Font.Style = [fsItalic]
       ParentFont = False
       TabOrder = 0
     end
     object btnPagFore: TButton
-      Left = 110
+      Left = 139
       Height = 26
-      Top = 11
+      Top = 10
       Width = 49
       Caption = '+Pag'
       OnClick = btnPagForeClick
       TabOrder = 1
     end
     object btnPagBack: TButton
-      Left = 4
+      Left = 6
       Height = 26
-      Top = 11
+      Top = 10
       Width = 51
       Caption = '- Pag'
       OnClick = btnPagBackClick
       TabOrder = 2
+    end
+    object tZoom: TEdit
+      Left = 322
+      Height = 26
+      Top = 10
+      Width = 80
+      Alignment = taCenter
+      Enabled = False
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -15
+      Font.Name = 'Verdana'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsItalic]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object btnZoomOut: TButton
+      Left = 238
+      Height = 26
+      Top = 10
+      Width = 75
+      Caption = '+ Zoom'
+      OnClick = btnZoomOutClick
+      TabOrder = 4
+    end
+    object btnZoomIn: TButton
+      Left = 409
+      Height = 26
+      Top = 10
+      Width = 75
+      Caption = '- Zoom'
+      OnClick = btnZoomInClick
+      TabOrder = 5
     end
   end
   object SelectDirectoryDialog1: TSelectDirectoryDialog

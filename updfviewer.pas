@@ -17,6 +17,9 @@ type
   TfrmMain = class(TForm)
     btnPagFore: TButton;
     btnPagBack: TButton;
+    btnZoomOut: TButton;
+    btnZoomIn: TButton;
+    tZoom: TEdit;
     tTotPag: TEdit;
     HScrollBar: TScrollBar;
     VScrollBar: TScrollBar;
@@ -38,6 +41,8 @@ type
     procedure btnPagBackClick(Sender: TObject);
     procedure btnSelDirClick(Sender: TObject);
     procedure btnPagForeClick(Sender: TObject);
+    procedure btnZoomInClick(Sender: TObject);
+    procedure btnZoomOutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure HScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode; var ScrollPos: Integer);
@@ -66,7 +71,9 @@ const
 {$ifdef BSD}
   EDITION = 'MacOSX';
 {$endif}
-  VERSION = 'v1.00b';
+  VERSION = 'v1.2306a';
+
+  // 07.06.23 = Add Zoom buttons
 
 
 var
@@ -170,7 +177,8 @@ begin
      end;
 
      setExceptionMask([exInvalidOp, exDenormalized, exZeroDivide, exOverflow, exUnderflow, exPrecision]);
-     PDFZoom:=2/2;
+     PDFZoom:=9/10;
+     tZoom.Text:= FloatToStr(PDFZoom*100)+'%';
 
 end;
 
@@ -327,6 +335,28 @@ begin
      if myPDFDoc.FPageNum+1 < myPDFDoc.GetPageCount then
       if ((myPDFDoc.GetPageCount) > 0) then GotoPage(myPDFDoc.FPageNum+1);
   end;
+
+end;
+
+procedure TfrmMain.btnZoomInClick(Sender: TObject);
+begin
+     if (PDFZoom > 0.10) then
+        PDFZoom:= PDFZoom - 0.10;
+
+     myPDFDoc.ResizeBitmap(vsPDF, PDFZoom, HScrollBar, VScrollBar);
+     myPDFDoc.CenterPreview(vsPDF,pnlHolder);
+     tZoom.Text:= FloatToStr(PDFZoom*100)+' %';
+
+end;
+
+procedure TfrmMain.btnZoomOutClick(Sender: TObject);
+begin
+     if PDFZoom < 1.30 then
+        PDFZoom:= PDFZoom + 0.10;
+
+     myPDFDoc.ResizeBitmap(vsPDF, PDFZoom, HScrollBar, VScrollBar);
+     myPDFDoc.CenterPreview(vsPDF,pnlHolder);
+     tZoom.Text:= FloatToStr(PDFZoom*100)+' %';
 
 end;
 
